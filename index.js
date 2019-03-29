@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
-import initials from 'initials';
 
 // from https://flatuicolors.com/
 const defaultColors = [
@@ -13,6 +12,8 @@ const defaultColors = [
   '#2c3e50', // midnight blue
 ];
 
+const defaultInitialLength = 1
+
 function sumChars(str) {
   let sum = 0;
   for (let i = 0; i < str.length; i++) {
@@ -20,6 +21,12 @@ function sumChars(str) {
   }
 
   return sum;
+}
+
+function initials(name, initialLength){
+  const length = Math.max(initialLength, defaultInitialLength)
+
+  return name.substring(0, length)
 }
 
 class UserAvatar extends React.PureComponent {
@@ -44,7 +51,7 @@ class UserAvatar extends React.PureComponent {
     if (!name) throw new Error('Avatar requires a name');
 
     if(typeof size !== 'number') size = parseInt(size);
-    let abbr = initials(name, {length:initialLength});
+    let abbr = initials(name, initialLength);
     if(!abbr) abbr = defaultName;
 
     if(isNaN(radius)) radius = 0.5
