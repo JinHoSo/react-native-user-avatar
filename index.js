@@ -35,6 +35,7 @@ class UserAvatar extends React.PureComponent {
       containerStyle,
       imageStyle,
       defaultName,
+      initialLength,
       radius = 0.5
     } = this.props;
 
@@ -43,8 +44,8 @@ class UserAvatar extends React.PureComponent {
     if (!name) throw new Error('Avatar requires a name');
 
     if(typeof size !== 'number') size = parseInt(size);
-
-    let abbr = initials(name);
+    let initialLength = initialLength || 2;
+    let abbr = initials(name, {length:initialLength});
     if(!abbr) abbr = defaultName;
 
     if(isNaN(radius)) radius = 0.5
